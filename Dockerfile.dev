@@ -1,0 +1,19 @@
+FROM node:alpine
+
+# update packages
+RUN apk update
+
+RUN npm install -g nodemon
+
+#create a folder inside docker
+WORKDIR /usr/src/app
+
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
